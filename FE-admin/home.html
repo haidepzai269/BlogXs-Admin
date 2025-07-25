@@ -1,0 +1,85 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Home - BlogXs</title>
+  <link rel="stylesheet" href="home.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+</head>
+<body>
+  <h1>👑 Admin Dashboard</h1>
+  <div id="adminHeader">
+    <div id="clockContainer">
+      <span id="clock">--:--:--</span>
+      <select id="timezoneSelector">
+        <option value="Asia/Ho_Chi_Minh">🇻🇳 Việt Nam</option>
+        <option value="Asia/Tokyo">🇯🇵 Japan</option>
+        <option value="Europe/London">🇬🇧 London</option>
+        <option value="America/New_York">🇺🇸 New York</option>
+        <option value="UTC">🌐 UTC</option>
+      </select>
+    </div>
+  </div>
+  
+  <section id="postsSection">
+    <h2>📝 Danh sách bài viết</h2>
+    <div id="postsContainer">Loading...</div>
+  </section>
+
+  <section id="notifySection">
+    <h2>📢 Gửi thông báo đến người dùng</h2>
+    <div class="notify-card">
+      <textarea id="notifyInput" placeholder="Nhập nội dung thông báo..." rows="4"></textarea>
+      <button id="sendNotifyBtn" onclick="sendNotify()">📨 Gửi thông báo</button>
+    </div>
+  </section>  
+  <div id="floatingLogo">Blog<span class="glow">Xs</span></div>
+  <canvas id="bgCanvas"></canvas>
+  <script src="authFetch.js"></script>
+  <!-- Three.js core -->
+  <script src="home.js"></script>
+
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
+  
+    const geometry = new THREE.IcosahedronGeometry(2.5, 5);
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x00ffff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1
+    });
+  
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+  
+    const light = new THREE.PointLight(0xffffff, 1);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+  
+    const animate = () => {
+      requestAnimationFrame(animate);
+      mesh.rotation.x += 0.002;
+      mesh.rotation.y += 0.004;
+      renderer.render(scene, camera);
+    };
+    animate();
+  
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+  </script>
+  <!-- Thêm vào home.html nếu không dùng import -->
+
+
+  
+</body>
+</html>

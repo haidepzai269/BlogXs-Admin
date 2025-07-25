@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng Nhập | BlogXs</title>
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="welcome">
+        <h1 id="logo"> 
+          <span>B</span><span>l</span><span>o</span><span>g</span><span>X</span><span>s</span>
+        </h1>
+        <p>Nơi bạn chia sẻ từng dòng cảm xúc ✍️</p>
+      </div>
+
+    <div class="form-box">
+      <div class="form-toggle">
+        <button id="show-login" class="active">Đăng Nhập</button>
+        <button id="show-register">Đăng Ký</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="form active">
+        <input type="text" placeholder="Tên đăng nhập" required />
+        <input type="password" placeholder="Mật khẩu" required />
+        <button type="submit">Vào Blog</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="form">
+        <input type="text" placeholder="Tên đăng nhập" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Mật khẩu" required />
+        <button type="submit">Tạo Tài Khoản</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>  
+</body>
+</html>

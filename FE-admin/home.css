@@ -1,0 +1,243 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);       /* Trong suốt nhẹ */
+  backdrop-filter: blur(5px);           /* Làm mờ nền phía sau */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s ease;
+}
+
+
+#postsContainer {
+  max-height: 400px; /* Hoặc 50vh tùy giao diện */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+
+/* Scrollbar đẹp */
+#postsContainer::-webkit-scrollbar {
+  width: 8px;
+}
+#postsContainer::-webkit-scrollbar-track {
+  background: #222;
+}
+#postsContainer::-webkit-scrollbar-thumb {
+  background: crimson;
+  border-radius: 10px;
+}
+/* Giữ phần bài viết đẹp */
+#postsContainer > .post {
+  border-bottom: 1px solid #444;
+  padding: 10px 0;
+}
+
+button {
+  background: crimson;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+#notifySection {
+  background: rgba(50, 0, 30, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 0, 85, 0.2);
+  box-shadow: 0 0 12px rgba(255, 0, 85, 0.2);
+}
+
+.notify-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#notifyInput {
+  padding: 12px;
+  border-radius: 8px;
+  background: #2a2a2a;
+  border: 1px solid #555;
+  color: white;
+  resize: vertical;
+  font-size: 16px;
+}
+
+#notifyInput:focus {
+  outline: none;
+  border-color: crimson;
+  box-shadow: 0 0 8px crimson;
+}
+
+#sendNotifyBtn {
+  align-self: flex-end;
+  background: linear-gradient(to right, crimson, orangered);
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+#sendNotifyBtn:hover {
+  background: linear-gradient(to right, orangered, crimson);
+  transform: scale(1.05);
+}
+
+
+
+#adminHeader {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4); /* Màu nền mờ mờ trong suốt */
+  backdrop-filter: blur(6px);     /* Làm mờ nền phía sau */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Viền mờ */
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Đổ bóng nhẹ */
+  transition: background 0.3s ease;
+}
+
+
+#clockContainer {
+  background-color: transparent !important;
+  padding: 8px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  color: white;
+}
+
+#clockContainer select {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+#clockContainer select:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+
+#timezoneSelector {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Toàn bộ nền */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #00c6ff, #0072ff);
+  background-size: 400% 400%;
+  animation: flowingBackground 20s ease infinite;
+  z-index: -1;
+  opacity: 0.25; /* mờ mờ như nước trôi */
+  filter: blur(8px);
+}
+
+/* Hiệu ứng trôi màu */
+@keyframes flowingBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+#floatingLogo {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Arial Black', sans-serif;
+  color: #111;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 2px solid #f81ce5;
+  box-shadow: 0 0 10px #f81ce5, 0 0 20px #f81ce5;
+  z-index: 999;
+  animation: pulseLogo 2s infinite;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+/* Phần chữ "Xs" có hiệu ứng neon */
+#floatingLogo .glow {
+  color: #f81ce5;
+  text-shadow: 0 0 10px #f81ce5, 0 0 20px #f81ce5;
+}
+
+/* Khi hover, đổi màu toàn logo và hiệu ứng glow thay đổi */
+#floatingLogo:hover {
+  border-color: #00d1b2;
+  box-shadow: 0 0 15px #00d1b2, 0 0 30px #00d1b2;
+  transform: scale(1.1);
+  color: #00d1b2;
+}
+
+#floatingLogo:hover .glow {
+  color: #00d1b2;
+  text-shadow: 0 0 15px #00d1b2, 0 0 30px #00d1b2;
+}
+
+@keyframes pulseLogo {
+  0%, 100% {
+    box-shadow: 0 0 10px #f81ce5, 0 0 20px #f81ce5;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 25px #f81ce5, 0 0 50px #f81ce5;
+    transform: scale(1.05);
+  }
+}
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}

@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1f1c2c, #16213e, #0f3460, #1a1a2e);
+  background-size: 400% 400%;
+  animation: bgFlow 20s ease infinite;
+  position: relative;
+}
+
+@keyframes bgFlow {
+  0%   { background-position: 100% 50%; }
+  50%  { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Ripple (sóng nước) */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04), transparent 70%);
+  animation: ripple 10s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.2;
+}
+
+@keyframes ripple {
+  0%   { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(-25%) translateY(-10%); }
+}
+
+/* Container với hiệu ứng kính */
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+/* Logo BlogXs từng chữ phát sáng */
+.welcome h1 {
+  display: inline-block;
+  font-family: 'Pacifico', cursive;
+  font-size: 3.5rem;
+  color: white;
+  text-shadow: 0 0 5px #fff;
+}
+
+.welcome span {
+  opacity: 0.2;
+  animation: glow 2s infinite;
+  display: inline-block;
+}
+
+.welcome span:nth-child(1) { animation-delay: 0s; }
+.welcome span:nth-child(2) { animation-delay: 0.2s; }
+.welcome span:nth-child(3) { animation-delay: 0.4s; }
+.welcome span:nth-child(4) { animation-delay: 0.6s; }
+.welcome span:nth-child(5) { animation-delay: 0.8s; }
+.welcome span:nth-child(6) { animation-delay: 1s; }
+
+@keyframes glow {
+  0%   { opacity: 0.2; text-shadow: 0 0 0px #00f7ff; }
+  50%  { opacity: 1; text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
+  100% { opacity: 0.2; text-shadow: 0 0 0px #00f7ff; }
+}
+
+.welcome p {
+  margin-top: 15px;
+  color: #cccccc;
+  font-style: italic;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+
+.form-box {
+    margin-top: 10px;
+  }
+  
+  .form-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .form-toggle button {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    color: #ccc;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .form-toggle button.active {
+    color: #00f7ff;
+    border-color: #00f7ff;
+  }
+  
+  .form {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .form.active {
+    display: flex;
+  }
+  
+  input {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+  }
+  
+  input::placeholder {
+    color: #bbb;
+  }
+  
+  button[type="submit"] {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #00f7ff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background: #00c6d6;
+  }
+  
