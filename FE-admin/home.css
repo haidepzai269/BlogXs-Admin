@@ -129,15 +129,17 @@ button {
   right: 20px;
   z-index: 999;
   color: white;
+  cursor: pointer;
 }
 
 #clockContainer select {
   background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: rgb(255, 0, 111);
   border: none;
   padding: 4px 8px;
   border-radius: 6px;
   backdrop-filter: blur(4px);
+  cursor: pointer;
 }
 #clockContainer select:focus {
   outline: none;
@@ -240,4 +242,18 @@ body::before {
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+
+#postsContainer {
+  transition: opacity 0.4s ease;
+  opacity: 1;
+}
+#postsContainer.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+#postsContainer.fade-in {
+  opacity: 1;
+  pointer-events: auto;
 }

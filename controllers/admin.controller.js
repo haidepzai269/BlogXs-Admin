@@ -104,3 +104,31 @@ exports.sendNotification = async (req, res) => {
     res.status(500).json({ message: 'Lỗi server' });
   }
 };
+
+// Lấy tất cả bình luận kèm tên người dùng và bài viết (tuỳ chọn)
+exports.getAllComments = async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT c.id, c.content, c.created_at, u.username, p.content AS post_content
+      FROM comments c
+      JOIN users u ON c.user_id = u.id
+      JOIN posts p ON c.post_id = p.id
+      ORDER BY c.created_at DESC
+    `);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Lỗi khi lấy bình luận' });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.query('DELETE FROM comments WHERE id = $1', [id]);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Lỗi khi xoá bình luận' });
+  }
+};

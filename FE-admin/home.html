@@ -24,6 +24,11 @@
   
   <section id="postsSection">
     <h2>📝 Danh sách bài viết</h2>
+    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+      <button id="showPostsBtn">📄 Xem bài viết</button>
+      <button id="showCommentsBtn">💬 Xem bình luận</button>
+    </div>
+    
     <div id="postsContainer">Loading...</div>
   </section>
 
@@ -84,7 +89,7 @@ document.getElementById('floatingLogo').addEventListener('click', () => {
   if (confirmLogout) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    window.location.href = 'login.html';
+    window.location.href = 'auth.html';
   }
 });
 

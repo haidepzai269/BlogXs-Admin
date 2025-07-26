@@ -1,13 +1,22 @@
+const postsContainer = document.getElementById('postsContainer');
+const showPostsBtn = document.getElementById('showPostsBtn');
+const showCommentsBtn = document.getElementById('showCommentsBtn');
+
+showPostsBtn.onclick = () => smoothTransition(loadPosts);
+showCommentsBtn.onclick = () => smoothTransition(loadComments);
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadPosts(); // Mặc định hiển thị bài viết khi vào trang
+});
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const postsContainer = document.getElementById('postsContainer');
-  
+async function loadPosts() {
   try {
     const res = await authFetch('/api/admin/posts');
     const posts = await res.json();
-
     postsContainer.innerHTML = '';
+    document.querySelector('section h2').textContent = '📝 Danh sách bài viết';
+
     posts.forEach(post => {
       const postDiv = document.createElement('div');
       postDiv.className = 'post';
@@ -21,7 +30,50 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     postsContainer.textContent = 'Lỗi khi tải bài viết';
   }
-});
+}
+
+async function loadComments() {
+  try {
+    const res = await authFetch('/api/admin/comments');
+    const comments = await res.json();
+    postsContainer.innerHTML = '';
+    document.querySelector('section h2').textContent = '💬 Danh sách bình luận';
+
+    comments.forEach(comment => {
+      const div = document.createElement('div');
+      div.className = 'post';
+      div.innerHTML = `
+        <p><strong>${comment.username}</strong> - ${new Date(comment.created_at).toLocaleString()}</p>
+        <p><i>Trong bài: </i>${comment.post_content}</p>
+        <p>${comment.content}</p>
+        <button onclick="deleteComment(${comment.id})">🗑 Xóa</button>
+      `;
+      postsContainer.appendChild(div);
+    });
+  } catch (err) {
+    postsContainer.textContent = 'Lỗi khi tải bình luận';
+  }
+}
+
+async function deleteComment(id) {
+  if (!confirm('Bạn có chắc muốn xoá bình luận này?')) return;
+
+  try {
+    const res = await authFetch(`/api/admin/comments/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (res.ok) {
+      alert('Đã xoá bình luận!');
+      loadComments();
+    } else {
+      alert('Không xoá được bình luận.');
+    }
+  } catch (err) {
+    console.error("Lỗi khi xoá bình luận:", err);
+    alert('Lỗi mạng hoặc server.');
+  }
+}
 
 async function deletePost(id) {
   if (!confirm('Bạn có chắc muốn xoá bài viết này?')) return;
@@ -149,5 +201,14 @@ function restoreDashboard() {
   if (hint) hint.remove();
 }
 
+function smoothTransition(callback) {
+  postsContainer.classList.add('fade-out');
+  setTimeout(() => {
+    callback();
+    postsContainer.classList.remove('fade-out');
+    postsContainer.classList.add('fade-in');
+    setTimeout(() => postsContainer.classList.remove('fade-in'), 300);
+  }, 300); // thời gian trùng với CSS
+}
 
 

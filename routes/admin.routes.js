@@ -13,4 +13,9 @@ router.post('/refresh-token', adminController.refreshToken);
 router.get('/posts', verifyToken, adminController.getAllPosts);
 router.delete('/posts/:id', verifyToken, adminController.deletePost);
 router.post('/notify', verifyToken, adminController.sendNotification);
+// comment
+router.get('/comments', verifyToken, adminController.getAllComments);
+router.delete('/comments/:id', verifyToken, adminController.deleteComment);
+
+
 module.exports = router;
